@@ -28,6 +28,10 @@ exports.getProblemById = async (req, res) => {
 exports.createProblem = async (req, res) => {
   const { title, description, difficulty, starterCode, testCases } = req.body;
 
+  if (!title || !description || !difficulty || !starterCode) {
+    return res.status(400).json({ message: 'Please fill in all required fields' });
+  }
+
   try {
     const problem = new Problem({
       title,
